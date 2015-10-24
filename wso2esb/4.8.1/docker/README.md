@@ -32,7 +32,3 @@ sh build.sh
 sh save.sh
 ```
 
-(6) Upload docker image to the Kubernetes cluster:
-```
-sh scp.sh
-```
