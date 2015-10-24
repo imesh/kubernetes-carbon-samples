@@ -5,7 +5,7 @@ metadata:
   labels:
     name: wso2esb
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     name: wso2esb
   template:
