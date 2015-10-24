@@ -1,36 +1,38 @@
-# WSO2 AS 5.2.1 Dockerfile
+# WSO2 ESB 4.8.1 Dockerfile
 
-WSO2 AS 5.2.1 Dockerfile defines required resources for building a Docker image with WSO2 AS 5.2.1.
+WSO2 ESB 4.8.1 Dockerfile defines required resources for building a Docker image with WSO2 ESB 4.8.1.
 
 ## How to build
 
-(1) Copy wso2as-5.2.1 binary pack to the packages folder:
+(1) Copy ESB 4.8.1 binary pack and the template module to the packages folder:
 
-* [wso2as-5.2.1.zip](http://wso2.com/products/application-server/)
+* [wso2esb-4.8.1.zip](http://wso2.com/products/enterprise-service-bus/)
+* [wso2esb-4.8.1-template-module] (https://github.com/wso2/private-paas-cartridges/blob/master/wso2esb/4.8.1/template-module)
 
-(2) Generate template module `wso2as-5.2.1-template-module-<PROJECT_VERSION>.zip` as described in [README.md](https://github.com/wso2/private-paas-cartridges/blob/master/wso2as/5.2.1/template-module/README.md) under "Creating AS Template Module for Private PaaS" section. Then copy the resulting Zip file to `packages` folder.
+(2) Build kubernetes membership scheme and copy JAR files to the template module:
+```
+git clone https://github.com/imesh/carbon-membership-schemes.git
+cd carbon-membership-schemes/kubernetes/kubernetes-mscheme-carbon42
+mvn clean install
+cd target/
+unzip kubernetes-mscheme-carbon42-<version>.zip
+unzip <esb-template-module>
+pushd kubernetes-mscheme-carbon42-<version>/lib
+cp *.jar <esb-template-module>/files/repository/componentes/lib
+zip <esb-template-module>
+```
 
-
-(3) Run build.sh file to build the docker image. (This will copy the plugins and template module to the docker image)
+(4) Run build.sh file to build the docker image: 
 ```
 sh build.sh
 ```
 
-(4) List docker images:
+(5) Save docker image to a local folder:
 ```
-docker images
+sh save.sh
 ```
-(5) If successfully built, docker image similar to following should display.
+
+(6) Upload docker image to the Kubernetes cluster:
 ```
-wso2/as-5.2.1        4.1.1              ac57800e96c2        2 minutes ago         777.6 MB
-```
-## Docker environment variables
-```
-PROJECT_VERSION - WSO2 Private PaaS Cartridge Repo Version
-PCA_HOME - Apache Stratos Python Cartridge Agent Home
-JAVA_HOME - JAVA HOME
-CONFIGURATOR_HOME - WSO2 Private PaaS Configurator Home
-WSO2_SERVER_TYPE - WSO2 Carbon Server type
-WSO2_SERVER_VERSION - WSO2 Carbon Server version
-TEMPLATE_MODULE_NAME - PPaaS Carbon Server template module name
+sh scp.sh
 ```
