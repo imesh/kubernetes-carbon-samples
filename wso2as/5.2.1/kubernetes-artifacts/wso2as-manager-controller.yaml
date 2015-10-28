@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: wso2as-manager
+  labels:
+    name: wso2as-manager
+spec:
+  replicas: 1
+  selector:
+    name: wso2as-manager
+  template:
+    metadata:
+      labels:
+        name: wso2as-manager
+    spec:
+      containers:
+      - name: wso2as-manager
+        image: imesh/wso2as:5.2.1
+        env:
+        -
+          name: CONFIG_PARAM_PROFILE
+          value: 'manager'
+        -
+          name: CONFIG_PARAM_CLUSTERING
+          value: 'true'
+        -
+          name: CONFIG_PARAM_MEMBERSHIP_SCHEME
+          value: kubernetes
+        - 
+          name: KUBERNETES_MASTER
+          value: http://172.17.8.101:8080
+        - 
+          name: KUBERNETES_NAMESPACE
+          value: default
+        -
+          name: KUBERNETES_SERVICES
+          value: 'wso2as-manager'
+        ports:
+        - containerPort: 9443
