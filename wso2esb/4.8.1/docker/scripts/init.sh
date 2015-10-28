@@ -42,7 +42,11 @@ python configurator.py
 popd
 echo "wso2 ${WSO2_SERVER_TYPE} configured successfully"
 
-echo "Starting wso2 ${WSO2_SERVER_TYPE}..."
-${CARBON_HOME}/bin/wso2server.sh
-echo "wso2 ${WSO2_SERVER_TYPE} - ${WSO2_SERVER_VERSION} started successfully"
+if [ "${CONFIG_PARAM_PROFILE}" = 'worker' ]; then
+    echo "Starting wso2 ${WSO2_SERVER_TYPE} as worker..."
+    ${CARBON_HOME}/bin/wso2server.sh -DworkerNode=true
+else
+    echo "Starting wso2 ${WSO2_SERVER_TYPE} as manager..."
+    ${CARBON_HOME}/bin/wso2server.sh
+fi
 

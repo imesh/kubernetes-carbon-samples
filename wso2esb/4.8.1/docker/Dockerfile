@@ -22,7 +22,7 @@ MAINTAINER dev@wso2.org
 ENV DEBIAN_FRONTEND noninteractive
 ENV WSO2_SERVER_TYPE esb
 ENV WSO2_SERVER_VERSION 4.8.1
-ENV TEMPLATE_MODULE_NAME wso2${WSO2_SERVER_TYPE}-${WSO2_SERVER_VERSION}-template-module-4.1.1-SNAPSHOT
+ENV TEMPLATE_MODULE_NAME wso2${WSO2_SERVER_TYPE}-${WSO2_SERVER_VERSION}-template-module-4.1.1
 
 # --------------------------------
 # Copy scripts, packages & plugins
@@ -31,14 +31,13 @@ COPY scripts/init.sh /usr/local/bin/init.sh
 COPY packages/${TEMPLATE_MODULE_NAME}.zip /opt/
 COPY packages/wso2${WSO2_SERVER_TYPE}-${WSO2_SERVER_VERSION}.zip /opt/
 
-# -------------------------------
-# Unzip and move template modules
-# -------------------------------
+# --------------------------------
+# Unzip and remove template module
+# --------------------------------
 WORKDIR /opt
 
 RUN unzip /opt/${TEMPLATE_MODULE_NAME}.zip -d ${CONFIGURATOR_HOME}/template-modules && \
-    unzip /opt/wso2${WSO2_SERVER_TYPE}-${WSO2_SERVER_VERSION}.zip && \
-	rm -rf /opt/${TEMPLATE_MODULE_NAME}.zip 
+	rm -rf /opt/${TEMPLATE_MODULE_NAME}.zip
 
 # ----------------------
 # Expose container ports
@@ -51,4 +50,4 @@ EXPOSE 9763 9443
 # Define entry point & start sshd
 # -------------------------------
 
-ENTRYPOINT /usr/local/bin/init.sh >> /tmp/init.sh.log 2>&1 | /usr/sbin/sshd -D
+ENTRYPOINT /usr/local/bin/init.sh
