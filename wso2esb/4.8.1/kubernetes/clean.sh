@@ -16,9 +16,5 @@
 # limitations under the License
 
 # ------------------------------------------------------------------------
--e
-image_id="imesh/wso2esb:4.8.1"
-tar_file="imesh-wso2esb-4.8.1.tar"
 
-echo "Saving docker image ${image_id} to disk..."
-docker save ${image_id} > ~/docker-images/${tar_file}
+kubectl delete -f .

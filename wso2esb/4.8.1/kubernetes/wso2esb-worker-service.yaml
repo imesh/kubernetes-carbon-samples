@@ -11,13 +11,13 @@ spec:
     -
       name: 'pass-through-http'
       port: 8280
-      nodePort: 32003
       targetPort: 8280
+      nodePort: 32003
     -
       name: 'pass-through-https'
       port: 8243
-      nodePort: 32004
       targetPort: 8243
+      nodePort: 32004
   # label keys and values that must match in order to receive traffic for this service
   selector: 
     name: wso2esb-worker

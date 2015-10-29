@@ -14,29 +14,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License
-#
+
 # ------------------------------------------------------------------------
 
-# Delete the AS docker cluster
-memberId=1
-deleteWkaMember() {
-	name="wso2as-${memberId}-wka"
-	docker rm ${name}
-	memberId=$((memberId + 1))
-	echo "AS wka member deleted: [name] ${name}"
-	sleep 1
-}
-
-deleteMember() {
-	name="wso2as-${memberId}"
-	docker rm ${name}
-	memberId=$((memberId + 1))
-	echo "AS member deleted: [name] ${name}"
-	sleep 1
-}
-
-echo "Deleting the AS docker cluster..."
-
-deleteWkaMember
-deleteMember
-deleteMember
+kubectl create -f .

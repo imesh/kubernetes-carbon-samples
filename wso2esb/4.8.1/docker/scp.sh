@@ -1,3 +1,24 @@
-scp ~/docker-images/imesh-wso2esb-4.8.1.tar knode1:
-ssh knode1 "docker load < imesh-wso2esb-4.8.1.tar"
-ssh knode1 "rm imesh-wso2esb-4.8.1.tar"
+#!/bin/bash
+# ------------------------------------------------------------------------
+#
+# Copyright 2005-2015 WSO2, Inc. (http://wso2.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+
+# ------------------------------------------------------------------------
+-e
+tar_file="imesh-wso2esb-4.8.1.tar"
+
+scp ~/docker-images/${tar_file} knode1:
+ssh knode1 "docker load < ${tar_file}"
+ssh knode1 "rm ${tar_file}"
