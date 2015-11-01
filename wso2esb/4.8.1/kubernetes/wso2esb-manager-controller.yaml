@@ -38,7 +38,7 @@ spec:
           value: default
         -
           name: KUBERNETES_SERVICES
-          value: 'wso2esb-manager'
+          value: 'wso2esb-manager,wso2esb-worker'
         -
           # Pass-through transport ports
           name: CONFIG_PARAM_PT_HTTP_PROXY_PORT
