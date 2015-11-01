@@ -16,7 +16,7 @@
 # limitations under the License
 
 # ------------------------------------------------------------------------
--e
+set -e
 image_id="imesh/wso2esb:4.8.1"
 tar_file="imesh-wso2esb-4.8.1.tar"
 

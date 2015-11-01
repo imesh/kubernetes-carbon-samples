@@ -16,7 +16,7 @@
 # limitations under the License
 
 # ------------------------------------------------------------------------
--e
+set -e
 tar_file="imesh-wso2esb-4.8.1.tar"
 
 scp ~/docker-images/${tar_file} knode1:
