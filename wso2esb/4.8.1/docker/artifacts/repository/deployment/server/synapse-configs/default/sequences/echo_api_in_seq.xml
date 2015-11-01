@@ -2,6 +2,7 @@
 <sequence xmlns="http://ws.apache.org/ns/synapse" name="echo_api_in_seq">
    <log level="custom">
       <property name="log" value="request received!" />
+      <property name="parameter" expression="get-property('uri.var.name')" />
    </log>
    <payloadFactory media-type="xml">
       <format>
