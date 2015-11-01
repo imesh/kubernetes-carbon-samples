@@ -17,4 +17,35 @@
 
 # ------------------------------------------------------------------------
 
-kubectl create -f .
+host=172.17.8.102
+manager_port=32001
+worker_port=32003
+
+echo "Deploying wso2esb manager service..."
+kubectl create -f wso2esb-manager-service.yaml
+
+echo "Deploying wso2esb worker service..."
+kubectl create -f wso2esb-worker-service.yaml
+
+echo "Deploying wso2esb manager controller..."
+kubectl create -f wso2esb-manager-controller.yaml
+
+echo "Waiting wso2esb manager to launch on http://${host}:${manager_port}"
+until $(curl --output /dev/null --silent --head --fail http://${host}:${manager_port}); do
+    printf '.'
+    sleep 5
+done
+
+echo -e "\nwso2esb manager launched!"
+
+echo "Deploying wso2esb worker controller..."
+kubectl create -f wso2esb-worker-controller.yaml
+
+echo "Waiting wso2esb worker to launch on http://${host}:${worker_port}"
+until $(curl --output /dev/null --silent --head --fail http://${host}:${worker_port}); do
+    printf '.'
+    sleep 5
+done
+
+echo -e "\nwso2esb worker launched!"
+
