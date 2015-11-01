@@ -30,6 +30,8 @@ echo "JAVA_HOME=${JAVA_HOME}" >> /etc/environment
 echo "CARBON_HOME=${CARBON_HOME}" >> /etc/environment
 echo "CONFIG_PARAM_LOCAL_MEMBER_HOST=${local_ip}" >> /etc/environment
 
+echo "Copying artifacts..."
+cp -vr /opt/artifacts/* ${CARBON_HOME}/
 echo "Configuring wso2 ${WSO2_SERVER_TYPE}..."
 echo "Environment variables:"
 printenv
