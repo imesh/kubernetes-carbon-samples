@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wso2esb-manager
-        image: imesh/wso2esb:4.8.1
+        image: imesh/wso2esb:4.8.1-v1
         env:
         -
           name: CONFIG_PARAM_PROFILE
