@@ -7,6 +7,7 @@
    <payloadFactory media-type="xml">
       <format>
          <response>
+            <version>v2</version>
             <hello>$1</hello>
          </response>
       </format>

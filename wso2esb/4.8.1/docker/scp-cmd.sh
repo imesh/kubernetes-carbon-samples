@@ -17,24 +17,12 @@
 
 # ------------------------------------------------------------------------
 set -e
+tar_file=$1
+node=$2
 
-if [ -z "$1" ]
-  then
-    echo "Usage: ./scp.sh [version]"
-    exit
-fi
-
-version=$1
-tar_file="imesh-wso2esb-4.8.1-${version}.tar"
-
-echo "Importing ${tar_file} to knode1"
-./scp-cmd.sh ${tar_file} knode1 &
-pid1=$!
-
-echo "Importing ${tar_file} to knode2"
-./scp-cmd.sh ${tar_file} knode2 &
-pid2=$!
-
-wait $pid1
-wait $pid2
-echo "${tar_file} imported successfully!"
+echo "scp ~/docker-images/${tar_file} ${node}:"
+scp ~/docker-images/${tar_file} ${node}:
+echo "ssh ${node} \"docker load < ${tar_file}\""
+ssh ${node} "docker load < ${tar_file}"
+echo "ssh ${node} \"rm ${tar_file}\""
+ssh ${node} "rm ${tar_file}"

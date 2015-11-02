@@ -18,4 +18,13 @@
 # ------------------------------------------------------------------------
 set -e
 
-docker build -t imesh/wso2esb:4.8.1 .
+if [ -z "$1" ]
+  then
+    echo "Usage: ./build.sh [version]"
+    exit
+fi
+
+version=$1
+image_id=imesh/wso2esb:4.8.1-${version}
+echo "Building docker image ${image_id}..."
+docker build -t ${image_id} .

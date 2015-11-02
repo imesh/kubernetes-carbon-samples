@@ -17,8 +17,16 @@
 
 # ------------------------------------------------------------------------
 set -e
-image_id="imesh/wso2esb:4.8.1"
-tar_file="imesh-wso2esb-4.8.1.tar"
+
+if [ -z "$1" ]
+  then
+    echo "Usage: ./save.sh [version]"
+    exit
+fi
+
+version=$1
+image_id="imesh/wso2esb:4.8.1-${version}"
+tar_file="imesh-wso2esb-4.8.1-${version}.tar"
 
 echo "Saving docker image ${image_id} to disk..."
 docker save ${image_id} > ~/docker-images/${tar_file}
